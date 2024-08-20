@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pl.shop.mapper.UserMapper">
+
+    <!--根据用户名查询用户列表 -->
+    <select id="userList" parameterType="java.lang.String" resultType="com.pl.shop.entity.User">
+        SELECT id,`name`,password,head_img,regist_date,phone,remark
+        FROM user
+        <if test="name!=null">
+            WHERE `name` like concat('%',#{name},'%')
+        </if>
+    </select>
+
+    <!--登录验证 -->
+    <select id="getUserLogin" parameterType="java.lang.String" resultType="com.pl.shop.entity.User">
+        SELECT id, `name`, password, head_img, regist_date, phone, remark
+        FROM user
+        WHERE `phone` = #{phone}
+          and `password` = #{password}
+    </select>
+
+    <insert id="insertUser" parameterType="com.pl.shop.entity.User">
+        INSERT INTO `user`(`name`, `password`, phone, head_img)
+        VALUES (#{name}, #{password}, #{phone}, '../images/no_img.png')
+    </insert>
+
+    <!--根据用户名查询用户列表 -->
+    <select id="getHeadImg" parameterType="java.lang.String" resultType="com.pl.shop.entity.User">
+        SELECT head_img,`name`,password
+        FROM user
+        <if test="phone!=null">
+            WHERE `phone` = #{phone}
+        </if>
+    </select>
+
+    <update id="updateUser" parameterType="com.pl.shop.entity.User">
+        UPDATE user
+        SET `name`= #{name},
+            `password`=#{password},
+            head_img=#{headImg}
+        WHERE phone = #{phone}
+    </update>
+</mapper>

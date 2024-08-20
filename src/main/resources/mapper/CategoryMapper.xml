@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pl.shop.mapper.CategoryMapper">
+
+    <!--查询所有类型 -->
+    <select id="getTypeList" parameterType="int" resultType="com.pl.shop.entity.Category">
+        SELECT c.id,c.parent_id,c.`name`,c.`status`,c.create_time,c.update_time
+        FROM category c
+        <if test="parentId!=0">
+            INNER JOIN category g ON g.id = c.parent_id
+        </if>
+        where c.parent_id=#{parentId}
+    </select>
+
+</mapper>
