@@ -58,8 +58,8 @@ public class UserServiceImpl implements UserService {
             user.setName(name);
             user.setPassword(password);
             user.setHeadImg(headImg);
-            int num = userMapper.updateUser(user);
-            return num;
+            int nam = userMapper.updateUser(user);
+            return nam;
         } else {
             return 0;
         }
