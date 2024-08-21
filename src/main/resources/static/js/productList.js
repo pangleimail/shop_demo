@@ -48,6 +48,7 @@ $("#delType").click(function () {
     $("#parentType").append("<option value=\"0\">请选择分类</option>");
     $("#sonType").append("<option value=\"0\">请选择分类</option>");
     getTypeList();
+    getProductList(1);
 })
 
 function getProductList(currentNum) {
